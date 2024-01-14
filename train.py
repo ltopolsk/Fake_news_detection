@@ -29,8 +29,8 @@ if __name__=="__main__":
 
     merged_data = preprocess(**config)
 
-    transformed_array_X = np.asarray([x for x in merged_data['text']])
-    X_train, X_test, Y_train, Y_test = train_test_split(transformed_array_X, merged_data['label'], test_size=0.2, random_state=2024)
+    transformed_array_X = np.asarray(merged_data['text'].tolist())
+    X_train, X_test, Y_train, Y_test = train_test_split(transformed_array_X, merged_data['label'], **config['split_data_args'])
     models = {
         'bayes': NaiveBayes(),
         'svm': SVM(**config['SVM_config']),
@@ -46,10 +46,5 @@ if __name__=="__main__":
             X_test2.append([x])
         X_test = np.asarray(X_test2)
     model = models[args.model]
-    train_and_save(model, args.filename, X_train, Y_train, batch_size=100, epochs=10, validation_split=0.2)
-    Y_pred = model.predict(X_test)
-    print(accuracy_score(Y_pred, Y_test))
-    print(precision_score(Y_test, Y_pred,))
-    print(recall_score(Y_test, Y_pred,))
-    print(f1_score(Y_test, Y_pred,))
-    print(confusion_matrix(Y_test, Y_pred,))
+    train_and_save(model, args.filename, X_train, Y_train)
+    print(model.eval(X_test, Y_test))
