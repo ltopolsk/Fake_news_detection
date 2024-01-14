@@ -7,17 +7,18 @@ class BaseModel:
         self.model = None
 
     def save(self, path):
-        with open(path, 'w') as f:
-            pickle.dump(self.model, f)
+        pickle.dump(self.model, open(path, 'wb'))
 
     def load(self, path):
-        with open(path, 'r') as f:
-            self.model = pickle.load(f)
+        self.model = pickle.load(open(path, 'rb'))
 
     def train(self, data, labels, **kwargs):
-        self.model.fit(data, labels)    
+        self.model.fit(data, labels)
+    
+    def predict(self, data):
+        return self.model.predict(data)
 
-class NaiveBayess(BaseModel):
+class NaiveBayes(BaseModel):
 
     def __init__(self, **kwargs) -> None:
         self.model = naive_bayes.GaussianNB(**kwargs)

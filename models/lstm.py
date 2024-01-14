@@ -1,7 +1,7 @@
 from keras.models import Sequential, load_model
 from keras.layers import LSTM, Dense, Dropout, Input
 
-class LSTM:
+class Custom_LSTM:
     
     def __init__(self, **model_args) -> None:
         self.model = self._get_LSTM(**model_args)
