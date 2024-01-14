@@ -3,6 +3,14 @@
         "vector_size": 100,
         "workers": 8
     },
+    "LSTM_config":{
+        "loss":"binary_crossentropy",
+        "optimizer":"adam",
+        "metrics":"['accuracy']"
+    },
+    "SVM_config":{
+        "kernel":"linear"
+    },
     "vector_size": 100,
     "first_n_tokens": 15,
     "all_data": false,
