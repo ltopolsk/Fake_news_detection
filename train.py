@@ -1,5 +1,6 @@
 import json
 import argparse
+import os
 import numpy as np
 from preprocessing.preprocess import preprocess
 from models.naive_svm import NaiveBayes, SVM
@@ -11,13 +12,15 @@ from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_sc
 def get_args():
     args = argparse.ArgumentParser(description='Script for training and saving models')
     args.add_argument('--config_file', default='config.json', action='store')
-    args.add_argument('--model', action='store', choices=('bayes', 'svm', 'lstm'))
+    args.add_argument('--model', action='store', choices=('bayes', 'svm', 'lstm'), required=True)
     args.add_argument('--filename', action='store', default='model')
     return args.parse_args()
 
 def train_and_save(model, filename, data, labels, **kwargs):
 
     model.train(data, labels, **kwargs)
+    if not os.path.exists(config['models_path']):
+        os.makedirs(config['models_path'])
     model.save(config['models_path'] + '/'+filename)
 
 if __name__=="__main__":
