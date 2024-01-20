@@ -3,6 +3,7 @@ import string
 import numpy as np
 from gensim.models import Word2Vec
 from typing import Iterable
+import pickle
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -31,6 +32,12 @@ def get_word2vec(words: Iterable[list[str]], **kwargs) -> Word2Vec:
         - other arguments for Word2Vec model (such as vector size, workers, etc.)
     """
     return Word2Vec(words, **kwargs)
+
+def save_word2vec(model, path):
+    pickle.dump(model, open(path, 'wb'))
+
+def load_word2vec(path):
+    return pickle.load(open(path, 'rb'))
 
 def vectorize(words: list[str], model: Word2Vec, first_n_tokens: int, vector_size: int) -> np.ndarray:
     """

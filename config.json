@@ -28,5 +28,7 @@
     "num_rows": 1000,
     "fake_data_path": "data/Fake.csv",
     "true_data_path": "data/True.csv",
+    "test_data_path": "data/test.csv",
+    "word2vec_path": "data/w2v_model",
     "models_path": "saved_models"
 }
