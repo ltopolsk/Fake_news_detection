@@ -13,9 +13,8 @@ def preprocess(**kwargs)->pd.DataFrame:
     true_data['label'] = 1
     
     merged_data = pd.concat((fake_data, true_data))
-    merged_data = merged_data.drop('date', axis=1)
-    merged_data['text'] = merged_data['subject'] + ' ' + merged_data['title'] + ' ' + merged_data['text']
-    merged_data = merged_data.drop('subject', axis=1).drop('title', axis=1)
+    merged_data['text'] = merged_data['title'] + ' ' + merged_data['text']
+    merged_data = merged_data.drop('subject', axis=1).drop('date', axis=1).drop('title', axis=1)
     
     random_permutation = np.random.permutation(len(merged_data))
     merged_data = merged_data.iloc[random_permutation]

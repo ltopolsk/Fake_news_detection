@@ -3,10 +3,30 @@
         "vector_size": 100,
         "workers": 8
     },
+    "LSTM_config":{
+        "model_config":{
+            "loss":"binary_crossentropy",
+            "optimizer":"adam",
+            "metrics":["accuracy"]
+        },
+        "train_config":{
+            "batch_size":100,
+            "epochs":1,
+            "validation_split":0.2
+        }
+    },
+    "SVM_config":{
+        "kernel":"linear"
+    },
+    "split_data_args":{
+        "test_size":0.2,
+        "random_state":2024
+    },
     "vector_size": 100,
     "first_n_tokens": 15,
-    "all_data": false,
+    "all_data": true,
     "num_rows": 1000,
     "fake_data_path": "data/Fake.csv",
-    "true_data_path": "data/True.csv"
+    "true_data_path": "data/True.csv",
+    "models_path": "saved_models"
 }
