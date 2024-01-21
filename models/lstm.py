@@ -1,6 +1,7 @@
 from keras.models import Sequential, load_model
 from keras.layers import LSTM, Dense, Dropout, Input
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, confusion_matrix
+import numpy as np
 
 class Custom_LSTM:
     
@@ -31,7 +32,7 @@ class Custom_LSTM:
     
     def eval(self, data, labels):
         labels_pred = self.model.predict(data)
-        labels_pred = labels_pred.astype('int32')
+        labels_pred = np.round(labels_pred)
         return {
             'accuracy':accuracy_score(labels_pred, labels),
             'precision':precision_score(labels, labels_pred),
