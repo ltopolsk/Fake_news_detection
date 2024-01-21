@@ -25,7 +25,7 @@ def preprocess(**kwargs)->pd.DataFrame:
     merged_data['text'] = merged_data['text'].apply(preprocess_text)
     w2v_text = get_word2vec(merged_data['text'], **kwargs.get('Word2Vec_args'))
     save_word2vec(w2v_text, kwargs.get('word2vec_path'))
-    merged_data['text'] = merged_data['text'].apply(lambda x: vectorize(x, w2v_text, kwargs.get('first_n_tokens', 15), kwargs.get('vec_size', 100)))
+    merged_data['text'] = merged_data['text'].apply(lambda x: vectorize(x, w2v_text, kwargs.get('first_n_tokens', 15), kwargs.get('Word2Vec_args', {}).get('vector_size', 100)))
 
     return merged_data
 
