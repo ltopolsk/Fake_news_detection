@@ -21,10 +21,10 @@ class Custom_LSTM:
         return model
     
     def save(self, path):
-        self.model.save(path)
+        self.model.save(path + '.keras')
 
     def load(self, path):
-        self.model = load_model(path)
+        self.model = load_model(path + '.keras')
 
     def train(self, data, labels):
         self.model.fit(data, labels, **self.train_params)
